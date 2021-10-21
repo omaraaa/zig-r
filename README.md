@@ -1,5 +1,5 @@
 # zig-r
-A zig library the provides a type to mark resources, a method to clean resources, and a resource tracker to catch any leaks.
+A zig library that provides a type to mark resources, a method to clean resources, and a resource tracker to catch any leaks.
 
 ## R
 `R(T)` is a type that warps a resource a `T`. For example, `R([]u8)` warps a slice of u8. To initialize it, call `R([]u8).init`. For example:
