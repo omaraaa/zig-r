@@ -2,7 +2,7 @@
 A zig library that provides a type to mark resources, a method to clean resources, and a resource tracker to catch any leaks.
 
 ## R
-`R(T)` is a type that warps a resource a `T`. For example, `R([]u8)` warps a slice of u8. To initialize it, call `R([]u8).init`. For example:
+`R(T)` is a type that wraps a resource a `T`. For example, `R([]u8)` warps a slice of u8. To initialize it, call `R([]u8).init`. For example:
 ```zig
 var r = R([]u8).init(try allocator.alloc(u8, 100), allocator, Allocator.mem.free);
 ```
@@ -18,7 +18,7 @@ For type `T`, `R(T).init` will take:
 2. `resource_manager` is a pointer to the object used to create the resource
 3. `deinit_fn` is a function that takes `resource_manager` and `T` as it's arguments to free the resource
 
-`R(T)` is basically a super fat pointer, so it recommend to not pass it around to other structs. Instead, use `R(T).get` to get the warped resource and pass that around. 
+`R(T)` is basically a super fat pointer, so it recommend to not pass it around to other structs. Instead, use `R(T).get` to get the wrapped resource and pass that around. 
 ```zig
   var r_array: []u8 = r.get();
 ```
