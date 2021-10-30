@@ -133,10 +133,11 @@ pub fn clean(value: anytype) void {
         .Union => |u| {
             if (u.tag_type != null) {
                 var active = std.meta.activeTag(value);
-                const fields = std.meta.fields(@TypeOf(value));
+                const fields = std.meta.fields(std.meta.TagType(@TypeOf(value)));
                 inline for (fields) |f| {
-                    if (std.cstr.cmp(f.name[0.. :0], @tagName(active)) == 0) {
+                    if (f.value == @enumToInt(active)) {
                         clean(@field(value, f.name));
+                        break;
                     }
                 }
             }
